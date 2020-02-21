@@ -1,9 +1,6 @@
 import hljs from "highlight.js/lib/highlight";
 import "highlight.js/styles/github.css";
 import elm from 'highlight.js/lib/languages/elm';
-// we're just importing the syntaxes we want from hljs
-// in order to reduce our JS bundle size
-// see https://bjacobel.com/2016/12/04/highlight-bundle-size/
 hljs.registerLanguage('elm', elm);
 
 
@@ -15,4 +12,21 @@ const pagesInit = require("elm-pages");
 
 pagesInit({
   mainElmModule: Elm.Main
+}).then(app => {
+  window.jsonpCallback = function(data) {
+    app.ports.jsonpCallback.send(data);
+  };
+  app.ports.execJsonp.subscribe(execJsonp);
 });
+
+
+function execJsonp(url) {
+  const script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.async = true;
+  script.src = url;
+
+  const tag = document.getElementsByTagName('script')[0];
+  tag.parentNode.insertBefore(script, tag);
+  script.parentNode.removeChild(script);
+}
