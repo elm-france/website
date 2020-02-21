@@ -15,6 +15,7 @@ jobs:
           node-version: '12.x'
       - run: npm install
       - run: npm run build --if-present
+      - run: echo "elm-france.com" >> CNAME
       - name: Deploy
         if: success()
         uses: peaceiris/actions-gh-pages@v3
