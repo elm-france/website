@@ -275,7 +275,7 @@ mainText =
 mailchimpForm : Model -> Html Msg
 mailchimpForm model =
     div [ class "mailchimpForm" ]
-        [ p [] [ text "Ne manquez pas le prochain évènement Elm près de chez vous !" ]
+        [ p [ class "formTitle" ] [ text "Ne manquez pas le prochain évènement Elm près de chez vous !" ]
         , form [ id "mailchimp-form", action mailchimpUrl, acceptCharset "UTF-8", method "POST", enctype "multipart/form-data", onSubmit RegisterToNewsletter ]
             [ input [ id "mailchimp-email", class "input", type_ "email", name "EMAIL", tabindex -1, onInput EmailInputChanged, value model.emailInput, placeholder "Votre email" ] []
             , input [ type_ "hidden", name "b_9398c39f75ed42968f2d53e9c_f4d9c246e8", tabindex -1, value "" ] []
@@ -290,6 +290,8 @@ mailchimpForm model =
 
             _ ->
                 text ""
+        , p [ class "footer" ]
+            [ text "Elm France est une association à but non lucratif - Votre adresse email ne sera transmise à aucun tiers et ne sera utilisée que pour informer d'évènements relatifs au langage Elm" ]
         ]
 
 
@@ -306,12 +308,12 @@ indexStyles =
             [ Css.class "hero" [ backgroundColor Colors.elmBlue, displayFlex, flexDirection row, justifyContent center, width (pct 100) ]
             , Css.class "logo" [ margin XL ]
             , Css.class "title" [ marginBottom L, fontSize FontSize.XXL, padding2 NoSpace S ]
-            , Css.class "subtitle" [ fontSize FontSize.L, padding2 NoSpace S, marginBottom L, maxWidth (pct 90), lineHeight (rem 3), textAlign center ]
-            , Css.class "mainText" [ displayFlex, flexDirection column, justifyContent Css.spaceAround, alignItems center, flexGrow (num 1), marginTop L ]
+            , Css.class "subtitle" [ fontSize FontSize.L, padding2 NoSpace S, marginBottom L, lineHeight (rem 3), textAlign center ]
+            , Css.class "mainText" [ displayFlex, flexDirection column, justifyContent Css.spaceAround, alignItems center, flexGrow (num 1), flexShrink (num 0), marginTop L ]
             , Css.class "mailchimpForm" [ padding M, backgroundColor Colors.elmBlue, displayFlex, flexDirection column, justifyContent Css.spaceBetween, alignItems center, width (pct 100) ]
-            , Css.class "mailchimpForm p" [ color Colors.darkBlue, fontSize FontSize.L ]
-            , Css.class "mailchimpForm p.error" [ color Colors.white ]
-            , Css.class "mailchimpForm p.success" [ color Colors.white ]
+            , Css.class "mailchimpForm p" [ color Colors.white ]
+            , Css.class "mailchimpForm p.formTitle" [ fontSize FontSize.L ]
+            , Css.class "mailchimpForm p.footer" [ fontSize FontSize.S ]
             , Css.class "button" [ margin M, padding S, backgroundColor Colors.elmOrange, Css.borderRadius (px 8), Css.borderColor Colors.elmOrange, color Colors.darkBlue, fontSize FontSize.L ]
             , Css.class "input" [ fontSize FontSize.L, marginTop M, maxWidth (pct 90) ]
             ]
