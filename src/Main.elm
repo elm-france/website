@@ -244,7 +244,7 @@ pageView model siteMetadata page viewForPage =
                 div []
                     [ Css.global indexStyles
                     , main_ [ class "home" ]
-                        [ img [ class "logo", src (ImagePath.toString images.elmFranceLogo) ] []
+                        [ Logo.elmFranceLogo
                         , h1 [ class "title" ] [ text "Elm France" ]
                         , p [ class "subtitle" ] [ text "Vous souhaitez participer à des évènements autour du langage Elm ? Apprendre et rencontrer des personnes partageant la même passion ?" ]
                         , mailchimpForm model

@@ -63,3 +63,49 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+
+#left-character {
+  animation: move-left-character 5s forwards ease-in-out;
+  animation-iteration-count: 1;
+}
+
+@keyframes move-left-character {
+  from {
+      transform: translate(15px, 0px);
+  }
+  to {
+      transform: translate(50px, 0px);
+  }
+}
+
+#left-triangle {
+  animation-name: moveLeftTriangle;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out ;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes moveLeftTriangle {
+  to {
+      transform: translate(35px, 0px);
+  }
+
+}
+
+#right-triangle {
+  transform-origin: 362.16px 104.982px;
+  animation: rotate-right-triangle 5s forwards ease-in-out;
+  animation-iteration-count: 1;
+}
+
+@keyframes rotate-right-triangle {
+  to {
+      transform: rotate(-9deg);
+  }
+}
+
+#right-character {
+  transform: translate(-20px, 0px);
+}
