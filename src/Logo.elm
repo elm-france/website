@@ -9,7 +9,10 @@ elmFranceLogo : Html msg
 elmFranceLogo =
     fromUnstyled <|
         svg
-            [ width "449.43", height "220.42" ]
+            [ id "logo"
+            , width "449.43"
+            , height "220.42"
+            ]
             [ background
             , threeCentralShapes
             , rightTriangle

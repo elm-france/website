@@ -109,3 +109,11 @@ a {
 #right-character {
   transform: translate(-20px, 0px);
 }
+
+@media (max-width: 768px) {
+    #logo {
+        flex-shrink: 0;
+        transform: scale(0.75) translate(-20px, 0px);
+    }
+
+}
