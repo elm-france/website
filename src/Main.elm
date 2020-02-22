@@ -297,7 +297,7 @@ indexStyles =
             [ Css.class "hero" [ backgroundColor Colors.elmBlue, displayFlex, justifyContent center, width (pct 100), padding XL, margin XL ]
             , Css.class "title" [ marginBottom L, fontSize FontSize.XXL, padding2 NoSpace S ]
             , Css.class "subtitle" [ fontSize FontSize.L, padding2 NoSpace S, marginBottom L, maxWidth (pct 50), lineHeight (rem 3), textAlign center ]
-            , Css.class "mailchimpForm" [ padding M, backgroundColor Colors.elmGray, displayFlex, flexDirection column, justifyContent Css.spaceAround ]
+            , Css.class "mailchimpForm" [ padding M, backgroundColor Colors.elmGray, displayFlex, flexDirection column, width (pct 100), alignItems center ]
             , Css.class "error" [ color Colors.elmOrange ]
             , Css.class "success" [ color Colors.elmBlue ]
             , Css.class "button" [ margin M, padding S, backgroundColor Colors.elmBlue, Css.borderRadius (px 8), Css.borderColor Colors.elmBlue, color Colors.white, fontSize FontSize.L ]
