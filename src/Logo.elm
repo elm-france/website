@@ -12,6 +12,7 @@ elmFranceLogo =
             [ id "logo"
             , width "449.43"
             , height "220.42"
+            , class "logo"
             ]
             [ background
             , threeCentralShapes
