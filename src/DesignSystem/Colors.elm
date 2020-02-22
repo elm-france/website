@@ -3,14 +3,14 @@ module DesignSystem.Colors exposing (..)
 import Css exposing (Color, hex, rgb)
 
 
-elmGreen : Color
-elmGreen =
-    hex "7FD13B"
+darkBlue : Color
+darkBlue =
+    hex "2B4053"
 
 
 elmBlue : Color
 elmBlue =
-    hex "5A6378"
+    hex "1293d8"
 
 
 elmGray : Color

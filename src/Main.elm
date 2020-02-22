@@ -1,18 +1,19 @@
 module Main exposing (main)
 
 import Color
-import Css exposing (Style, alignItems, backgroundColor, center, color, column, displayFlex, flexDirection, height, justifyContent, maxWidth, pct, vh)
+import Css exposing (Style, alignItems, backgroundColor, center, color, column, displayFlex, flexDirection, flexGrow, fontFamily, height, justifyContent, lineHeight, maxWidth, medium, num, pct, px, rem, sansSerif, textAlign, vh, width)
 import Css.Global as Css exposing (Snippet)
 import DesignSystem.Colors as Colors
-import DesignSystem.Spacing exposing (SpacingSize(..), marginBottom, padding, padding2)
+import DesignSystem.Spacing exposing (SpacingSize(..), margin, marginBottom, padding, padding2)
 import DesignSystem.Typography as FontSize exposing (fontSize)
 import Head
 import Head.Seo as Seo
 import Html
 import Html.Styled exposing (Html, div, form, fromUnstyled, h1, img, input, label, main_, p, text, toUnstyled)
-import Html.Styled.Attributes exposing (acceptCharset, action, class, disabled, enctype, for, id, method, name, src, tabindex, type_, value)
+import Html.Styled.Attributes exposing (acceptCharset, action, class, disabled, enctype, for, id, method, name, placeholder, src, tabindex, type_, value)
 import Html.Styled.Events exposing (onInput, onSubmit)
 import Json.Decode as Decode exposing (Decoder)
+import Logo
 import Markdown
 import Metadata exposing (Metadata)
 import MySitemap
@@ -244,23 +245,30 @@ pageView model siteMetadata page viewForPage =
                 div []
                     [ Css.global indexStyles
                     , main_ [ class "home" ]
-                        [ Logo.elmFranceLogo
+                        [ hero
                         , h1 [ class "title" ] [ text "Elm France" ]
-                        , p [ class "subtitle" ] [ text "Vous souhaitez participer à des évènements autour du langage Elm ? Apprendre et rencontrer des personnes partageant la même passion ?" ]
+                        , p [ class "subtitle" ]
+                            [ text "Vous souhaitez participer à des évènements autour du langage Elm ? Apprendre, partager avec d'autres personnes intéressées par ce langage ?" ]
                         , mailchimpForm model
                         ]
                     ]
             }
 
 
+hero : Html msg
+hero =
+    div [ class "hero" ]
+        [ Logo.elmFranceLogo ]
+
+
 mailchimpForm : Model -> Html Msg
 mailchimpForm model =
     div [ class "mailchimpForm" ]
-        [ form [ id "mailchimp-form", action mailchimpUrl, acceptCharset "UTF-8", method "POST", enctype "multipart/form-data", onSubmit RegisterToNewsletter ]
-            [ label [ for "mailchimp-email" ] [ text "Votre email" ]
-            , input [ id "mailchimp-email", type_ "email", name "EMAIL", tabindex -1, onInput EmailInputChanged, value model.emailInput ] []
+        [ p [] [ text "Ne manquez pas le prochain évènement Elm près de chez vous !" ]
+        , form [ id "mailchimp-form", action mailchimpUrl, acceptCharset "UTF-8", method "POST", enctype "multipart/form-data", onSubmit RegisterToNewsletter ]
+            [ input [ id "mailchimp-email", class "input", type_ "email", name "EMAIL", tabindex -1, onInput EmailInputChanged, value model.emailInput, placeholder "Votre email" ] []
             , input [ type_ "hidden", name "b_9398c39f75ed42968f2d53e9c_f4d9c246e8", tabindex -1, value "" ] []
-            , input [ type_ "submit", value "S'abonner à nos évènements", disabled (RemoteData.isLoading model.mailchimpRegistration) ] []
+            , input [ type_ "submit", class "button", value "Prévenez-moi", disabled (RemoteData.isLoading model.mailchimpRegistration) ] []
             ]
         , case model.mailchimpRegistration of
             Success () ->
@@ -278,19 +286,22 @@ indexStyles : List Snippet
 indexStyles =
     [ Css.class "home"
         [ height (vh 100)
-        , backgroundColor Colors.elmGreen
+        , backgroundColor Colors.darkBlue
+        , fontFamily sansSerif
         , color Colors.white
         , displayFlex
         , alignItems center
         , justifyContent center
         , flexDirection column
         , Css.descendants
-            [ Css.class "title" [ marginBottom L, fontSize FontSize.XXL, padding2 NoSpace S ]
-            , Css.class "subtitle" [ fontSize FontSize.L, padding2 NoSpace S, marginBottom L ]
-            , Css.class "logo" [ maxWidth (pct 90), marginBottom L ]
-            , Css.class "mailchimpForm" [ padding M, backgroundColor Colors.elmGray ]
+            [ Css.class "hero" [ backgroundColor Colors.elmBlue, displayFlex, justifyContent center, width (pct 100), padding XL, margin XL ]
+            , Css.class "title" [ marginBottom L, fontSize FontSize.XXL, padding2 NoSpace S ]
+            , Css.class "subtitle" [ fontSize FontSize.L, padding2 NoSpace S, marginBottom L, maxWidth (pct 50), lineHeight (rem 3), textAlign center ]
+            , Css.class "mailchimpForm" [ padding M, backgroundColor Colors.elmGray, displayFlex, flexDirection column, justifyContent Css.spaceAround ]
             , Css.class "error" [ color Colors.elmOrange ]
             , Css.class "success" [ color Colors.elmBlue ]
+            , Css.class "button" [ margin M, padding S, backgroundColor Colors.elmBlue, Css.borderRadius (px 8), Css.borderColor Colors.elmBlue, color Colors.white, fontSize FontSize.L ]
+            , Css.class "input" [ fontSize FontSize.L ]
             ]
         ]
     ]

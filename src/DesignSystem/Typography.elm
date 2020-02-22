@@ -37,6 +37,7 @@ fontSize size =
             Css.fontSize (rem 3.5)
 
 
+
 typography : TypographyType -> (List (Html.Attribute msg) -> List (Html msg) -> Html msg) -> List (Html.Attribute msg) -> String -> Html msg
 typography typographyType tagFunction attributes content =
     let

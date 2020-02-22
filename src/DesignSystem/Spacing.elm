@@ -1,4 +1,4 @@
-module DesignSystem.Spacing exposing (SpacingSize(..), margin2, marginBottom, marginLeft, marginRight, marginTop, padding, padding2, paddingLeft, paddingTop, spacing)
+module DesignSystem.Spacing exposing (SpacingSize(..), margin, margin2, marginBottom, marginLeft, marginRight, marginTop, padding, padding2, paddingLeft, paddingTop, spacing)
 
 import Css exposing (Px, Style, px)
 import Html.Styled as Html exposing (Html)
@@ -40,6 +40,10 @@ spacing spacingSize =
             px 60
 
 
+margin : SpacingSize -> Style
+margin spacingSize =
+    Css.margin (spacing spacingSize)
+
 marginBottom : SpacingSize -> Style
 marginBottom spacingSize =
     Css.marginBottom (spacing spacingSize)
@@ -73,6 +77,7 @@ paddingLeft spacingSize =
 padding2 : SpacingSize -> SpacingSize -> Style
 padding2 spacingY spacingX =
     Css.padding2 (spacing spacingY) (spacing spacingX)
+
 
 
 padding : SpacingSize -> Style
