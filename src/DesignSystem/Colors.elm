@@ -1,6 +1,7 @@
 module DesignSystem.Colors exposing (..)
 
-import Css exposing (Color, hex, rgb)
+import Color
+import Css exposing (Color, hex, rgb, rgba)
 
 
 red : Color
@@ -18,6 +19,11 @@ elmBlue =
     hex "1293d8"
 
 
+elmBlueStandardColor : Color.Color
+elmBlueStandardColor =
+    Color.rgb 18 147 216
+
+
 elmGray : Color
 elmGray =
     hex "5A6378"
@@ -28,6 +34,6 @@ elmOrange =
     hex "F0AD00"
 
 
-white : Color
-white =
-    rgb 255 255 255
+footerText : Color
+footerText =
+    rgba 255 255 255 0.8
