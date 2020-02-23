@@ -3,6 +3,11 @@ module DesignSystem.Colors exposing (..)
 import Css exposing (Color, hex, rgb)
 
 
+red : Color
+red =
+    hex "cc0000"
+
+
 darkBlue : Color
 darkBlue =
     hex "2B4053"

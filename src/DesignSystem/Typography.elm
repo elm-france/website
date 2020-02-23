@@ -11,7 +11,8 @@ type TypographyType
 
 
 type FontSize
-    = S
+    = XS
+    | S
     | M
     | L
     | XL
@@ -21,11 +22,14 @@ type FontSize
 fontSize : FontSize -> Style
 fontSize size =
     case size of
+        XS ->
+            Css.fontSize (rem 0.75)
+
         S ->
-            Css.fontSize (rem 0.8)
+            Css.fontSize (rem 1)
 
         M ->
-            Css.fontSize (rem 1)
+            Css.fontSize (rem 1.2)
 
         L ->
             Css.fontSize (rem 1.5)
@@ -35,7 +39,6 @@ fontSize size =
 
         XXL ->
             Css.fontSize (rem 3.5)
-
 
 
 typography : TypographyType -> (List (Html.Attribute msg) -> List (Html msg) -> Html msg) -> List (Html.Attribute msg) -> String -> Html msg

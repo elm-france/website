@@ -44,6 +44,7 @@ margin : SpacingSize -> Style
 margin spacingSize =
     Css.margin (spacing spacingSize)
 
+
 marginBottom : SpacingSize -> Style
 marginBottom spacingSize =
     Css.marginBottom (spacing spacingSize)
@@ -77,7 +78,6 @@ paddingLeft spacingSize =
 padding2 : SpacingSize -> SpacingSize -> Style
 padding2 spacingY spacingX =
     Css.padding2 (spacing spacingY) (spacing spacingX)
-
 
 
 padding : SpacingSize -> Style
