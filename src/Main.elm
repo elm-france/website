@@ -33,14 +33,14 @@ import Task
 
 manifest : Manifest.Config Pages.PathKey
 manifest =
-    { backgroundColor = Just Color.green
+    { backgroundColor = Just Colors.elmBlueStandardColor
     , categories = [ Pages.Manifest.Category.education ]
     , displayMode = Manifest.Standalone
     , orientation = Manifest.Portrait
     , description = "Elm France – organisation d'évènements Elm en France"
     , iarcRatingId = Nothing
     , name = "Elm France"
-    , themeColor = Just Color.green
+    , themeColor = Just Colors.elmBlueStandardColor
     , startUrl = pages.index
     , shortName = Just "Elm France"
     , sourceIcon = images.iconPng
@@ -248,8 +248,7 @@ pageView model siteMetadata page viewForPage =
                         [ hero
                         , mainText
                         , mailchimpForm model
-                        , p [ class "footer" ]
-                            [ text "Elm France est une association à but non lucratif – Votre adresse email ne sera transmise à aucun tiers et ne sera utilisée que pour informer d'évènements relatifs au langage Elm" ]
+                        , footer
                         ]
                     ]
             }
@@ -291,6 +290,12 @@ mailchimpForm model =
             _ ->
                 text ""
         ]
+
+
+footer : Html Msg
+footer =
+    p [ class "footer" ]
+        [ text "Elm France est une association à but non lucratif – Votre adresse email ne sera transmise à aucun tiers et ne sera utilisée que pour informer d'évènements relatifs au langage Elm." ]
 
 
 indexStyles : List Snippet
@@ -374,6 +379,7 @@ indexStyles =
             , Css.class "error" [ fontSize FontSize.L, maxWidth (pct 90), color Colors.red ]
             , Css.class "footer"
                 [ backgroundColor Colors.elmBlue
+                , color Colors.footerText
                 , fontSize FontSize.S
                 , width (pct 100)
                 , textAlign center
