@@ -64,7 +64,7 @@ a {
 
 
 #left-character {
-  animation: move-left-character 3s forwards ease-in-out;
+  animation: move-left-character 2s forwards ease-in-out;
   animation-iteration-count: 1;
 }
 
@@ -81,7 +81,7 @@ a {
   animation-name: moveLeftTriangle;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out ;
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-iteration-count: 1;
 }
 
@@ -94,7 +94,7 @@ a {
 
 #right-triangle {
   transform-origin: 362.16px 104.982px;
-  animation: rotate-right-triangle 3s forwards ease-in-out;
+  animation: rotate-right-triangle 2s forwards ease-in-out;
   animation-iteration-count: 1;
 }
 
@@ -109,11 +109,6 @@ a {
 }
 
 @media (max-width: 768px) {
-    #logo {
-        flex-shrink: 0;
-        transform: scale(0.75) translate(-20px, 0px);
-    }
-
     #mailchimp-form {
         display: flex;
         flex-direction: column;

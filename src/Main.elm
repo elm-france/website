@@ -1,16 +1,17 @@
 module Main exposing (main)
 
 import Color
-import Css exposing (Style, alignItems, backgroundColor, center, color, column, displayFlex, flexDirection, flexGrow, flexShrink, fontFamily, height, justifyContent, lineHeight, maxWidth, medium, num, pct, px, rem, row, sansSerif, textAlign, vh, width)
+import Css exposing (Style, alignItems, backgroundColor, bold, center, color, column, displayFlex, flexDirection, flexGrow, fontFamily, fontWeight, height, int, justifyContent, lineHeight, maxWidth, pct, px, rem, sansSerif, solid, textAlign, vh, width, zero)
 import Css.Global as Css exposing (Snippet)
+import Css.Media exposing (only, screen)
 import DesignSystem.Colors as Colors
-import DesignSystem.Spacing exposing (SpacingSize(..), margin, marginBottom, marginTop, padding, padding2)
+import DesignSystem.Spacing exposing (SpacingSize(..), margin2, marginBottom, marginTop, padding, padding2)
 import DesignSystem.Typography as FontSize exposing (fontSize)
 import Head
 import Head.Seo as Seo
 import Html
-import Html.Styled exposing (Html, div, form, fromUnstyled, h1, img, input, label, main_, p, text, toUnstyled)
-import Html.Styled.Attributes exposing (acceptCharset, action, class, css, disabled, enctype, for, id, method, name, placeholder, src, tabindex, type_, value)
+import Html.Styled exposing (Html, div, form, fromUnstyled, h1, input, main_, p, text, toUnstyled)
+import Html.Styled.Attributes exposing (acceptCharset, action, autofocus, class, disabled, enctype, id, method, name, placeholder, required, tabindex, type_, value)
 import Html.Styled.Events exposing (onInput, onSubmit)
 import Json.Decode as Decode exposing (Decoder)
 import Logo
@@ -19,7 +20,6 @@ import Metadata exposing (Metadata)
 import MySitemap
 import Pages exposing (images, pages)
 import Pages.Document
-import Pages.ImagePath as ImagePath
 import Pages.Manifest as Manifest
 import Pages.Manifest.Category
 import Pages.PagePath exposing (PagePath)
@@ -248,6 +248,8 @@ pageView model siteMetadata page viewForPage =
                         [ hero
                         , mainText
                         , mailchimpForm model
+                        , p [ class "footer" ]
+                            [ text "Elm France est une association à but non lucratif – Votre adresse email ne sera transmise à aucun tiers et ne sera utilisée que pour informer d'évènements relatifs au langage Elm" ]
                         ]
                     ]
             }
@@ -259,16 +261,14 @@ hero =
         [ Logo.elmFranceLogo ]
 
 
-mainText : Html msg
+mainText : Html Msg
 mainText =
-    div
-        [ class "mainText"
-        ]
+    div [ class "mainText" ]
         [ h1 [ class "title" ] [ text "Elm France" ]
-        , p [ class "subtitle" ]
-            [ text "Vous souhaitez participer à des évènements autour du langage Elm ?" ]
-        , p [ class "subtitle" ]
-            [ text "Apprendre, partager avec d'autres personnes intéressées par ce langage ?" ]
+        , div [ class "subtitle" ]
+            [ p [] [ text "Vous souhaitez participer à des évènements autour du langage Elm ?" ]
+            , p [] [ text "Apprendre, partager avec d'autres personnes intéressées par ce langage ?" ]
+            ]
         ]
 
 
@@ -277,8 +277,8 @@ mailchimpForm model =
     div [ class "mailchimpForm" ]
         [ p [ class "formTitle" ] [ text "Ne manquez pas le prochain évènement Elm près de chez vous !" ]
         , form [ id "mailchimp-form", action mailchimpUrl, acceptCharset "UTF-8", method "POST", enctype "multipart/form-data", onSubmit RegisterToNewsletter ]
-            [ input [ id "mailchimp-email", class "input", type_ "email", name "EMAIL", tabindex -1, onInput EmailInputChanged, value model.emailInput, placeholder "Votre email" ] []
-            , input [ type_ "hidden", name "b_9398c39f75ed42968f2d53e9c_f4d9c246e8", tabindex -1, value "" ] []
+            [ input [ type_ "hidden", name "b_9398c39f75ed42968f2d53e9c_f4d9c246e8", tabindex -1, value "" ] []
+            , input [ id "mailchimp-email", class "emailInput", type_ "email", name "EMAIL", onInput EmailInputChanged, value model.emailInput, placeholder "Votre email", autofocus True, required True ] []
             , input [ type_ "submit", class "button", value "Prévenez-moi", disabled (RemoteData.isLoading model.mailchimpRegistration) ] []
             ]
         , case model.mailchimpRegistration of
@@ -290,8 +290,6 @@ mailchimpForm model =
 
             _ ->
                 text ""
-        , p [ class "footer" ]
-            [ text "Elm France est une association à but non lucratif - Votre adresse email ne sera transmise à aucun tiers et ne sera utilisée que pour informer d'évènements relatifs au langage Elm" ]
         ]
 
 
@@ -305,20 +303,94 @@ indexStyles =
         , alignItems center
         , flexDirection column
         , Css.descendants
-            [ Css.class "hero" [ backgroundColor Colors.elmBlue, displayFlex, flexDirection row, justifyContent center, width (pct 100) ]
-            , Css.class "logo" [ margin XL ]
-            , Css.class "title" [ marginBottom L, fontSize FontSize.XXL, padding2 NoSpace S ]
-            , Css.class "subtitle" [ fontSize FontSize.L, padding2 NoSpace S, marginBottom L, lineHeight (rem 3), textAlign center ]
-            , Css.class "mainText" [ displayFlex, flexDirection column, justifyContent Css.spaceAround, alignItems center, flexGrow (num 1), flexShrink (num 0), marginTop L ]
-            , Css.class "mailchimpForm" [ padding M, backgroundColor Colors.elmBlue, displayFlex, flexDirection column, justifyContent Css.spaceBetween, alignItems center, width (pct 100) ]
-            , Css.class "mailchimpForm p" [ color Colors.white ]
-            , Css.class "mailchimpForm p.formTitle" [ fontSize FontSize.L ]
-            , Css.class "mailchimpForm p.footer" [ fontSize FontSize.S ]
-            , Css.class "button" [ margin M, padding S, backgroundColor Colors.elmOrange, Css.borderRadius (px 8), Css.borderColor Colors.elmOrange, color Colors.darkBlue, fontSize FontSize.L ]
-            , Css.class "input" [ fontSize FontSize.L, marginTop M, maxWidth (pct 90) ]
+            [ Css.class "hero"
+                [ backgroundColor Colors.elmBlue
+                , displayFlex
+                , justifyContent center
+                , padding2 L NoSpace
+                , width (pct 100)
+                , onMobile [ padding2 M NoSpace ]
+                ]
+            , Css.class "logo"
+                [ maxWidth (pct 70)
+                , width (px 300)
+                ]
+            , Css.class "title"
+                [ marginBottom L
+                , fontSize FontSize.XXL
+                , padding2 NoSpace S
+                , onMobile [ marginBottom S, fontSize FontSize.XL ]
+                ]
+            , Css.class "mainText"
+                [ displayFlex
+                , flexDirection column
+                , alignItems center
+                , padding2 M S
+                , Css.descendants [ Css.p [ Css.adjacentSiblings [ Css.p [ marginTop S ] ] ] ]
+                , onMobile [ padding2 S XS ]
+                ]
+            , Css.class "subtitle"
+                [ fontSize FontSize.L
+                , lineHeight (rem 3)
+                , textAlign center
+                , onMobile [ fontSize FontSize.M, lineHeight (rem 1.5) ]
+                ]
+            , Css.class "mailchimpForm"
+                [ displayFlex
+                , flexDirection column
+                , justifyContent Css.center
+                , alignItems center
+                , width (pct 100)
+                , flexGrow (int 1)
+                , padding2 M S
+                , onMobile [ padding2 XS XS ]
+                ]
+            , Css.class "formTitle"
+                [ fontSize FontSize.L
+                , onMobile [ fontSize FontSize.M ]
+                , lineHeight (rem 1.5)
+                , textAlign center
+                , fontWeight bold
+                ]
+            , Css.class "emailInput"
+                [ margin2 M NoSpace
+                , padding S
+                , Css.borderRadius4 (px 8) zero zero (px 8)
+                , Css.border3 (px 2) solid Colors.elmOrange
+                , color Colors.darkBlue
+                , fontSize FontSize.L
+                , onMobile [ Css.borderRadius4 (px 8) (px 8) zero zero, marginBottom NoSpace, width (pct 100), padding XS ]
+                ]
+            , Css.class "button"
+                [ margin2 M NoSpace
+                , padding S
+                , backgroundColor Colors.elmOrange
+                , Css.borderRadius4 zero (px 8) (px 8) zero
+                , Css.border3 (px 2) solid Colors.elmOrange
+                , color Colors.darkBlue
+                , fontSize FontSize.L
+                , onMobile [ Css.borderRadius4 zero zero (px 8) (px 8), marginTop NoSpace, width (pct 100), padding XS ]
+                ]
+            , Css.class "error" [ fontSize FontSize.L, maxWidth (pct 90), color Colors.red ]
+            , Css.class "footer"
+                [ backgroundColor Colors.elmBlue
+                , fontSize FontSize.S
+                , width (pct 100)
+                , textAlign center
+                , padding2 M M
+                , onMobile [ fontSize FontSize.XS, padding2 XS XS ]
+                ]
             ]
         ]
     ]
+
+
+onMobile : List Style -> Style
+onMobile styles =
+    Css.Media.withMedia
+        [ only screen [ Css.Media.maxWidth (px 768) ]
+        ]
+        styles
 
 
 commonHeadTags : List (Head.Tag Pages.PathKey)
