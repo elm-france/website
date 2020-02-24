@@ -28,6 +28,7 @@ import Ports exposing (jsonpCallback)
 import Process
 import RemoteData exposing (RemoteData(..), WebData)
 import Task
+import Url
 
 
 manifest : Manifest.Config Pages.PathKey
@@ -165,7 +166,7 @@ mailchimpUrl =
 
 subscribeToMailchimp : String -> Cmd Msg
 subscribeToMailchimp emailInput =
-    Ports.execJsonp (mailchimpUrl ++ "&EMAIL=" ++ emailInput)
+    Ports.execJsonp (mailchimpUrl ++ "&EMAIL=" ++ Url.percentEncode emailInput)
 
 
 unknownError : String
