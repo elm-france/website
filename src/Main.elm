@@ -284,11 +284,20 @@ mailchimpForm model =
                 p [ class "success" ] [ text "Félicitations ! Vous serez tenu·e informé·e de nos prochains évènements !" ]
 
             Failure error ->
-                p [ class "error" ] [ text error ]
+                p [ class "error" ] [ text (mailchimpErrorToString error) ]
 
             _ ->
                 text ""
         ]
+
+
+mailchimpErrorToString : String -> String
+mailchimpErrorToString error =
+    if String.contains "is already subscribed" error then
+        "Vous êtes déjà inscrit à cette liste de diffusion"
+
+    else
+        error
 
 
 footer : Html Msg
