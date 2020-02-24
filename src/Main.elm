@@ -10,7 +10,7 @@ import Head
 import Head.Seo as Seo
 import Html
 import Html.Styled exposing (Html, div, form, fromUnstyled, h1, input, main_, p, text, toUnstyled)
-import Html.Styled.Attributes exposing (acceptCharset, action, autofocus, class, disabled, enctype, id, method, name, placeholder, required, tabindex, type_, value)
+import Html.Styled.Attributes exposing (acceptCharset, action, attribute, autofocus, class, disabled, enctype, id, method, name, placeholder, required, tabindex, type_, value)
 import Html.Styled.Events exposing (onInput, onSubmit)
 import Json.Decode as Decode exposing (Decoder)
 import Logo
@@ -277,7 +277,19 @@ mailchimpForm model =
         [ p [ class "formTitle" ] [ text "Ne manquez pas le prochain évènement Elm près de chez vous !" ]
         , form [ id "mailchimp-form", action mailchimpUrl, acceptCharset "UTF-8", method "POST", enctype "multipart/form-data", onSubmit RegisterToNewsletter ]
             [ input [ type_ "hidden", name "b_9398c39f75ed42968f2d53e9c_f4d9c246e8", tabindex -1, value "" ] []
-            , input [ id "mailchimp-email", class "emailInput", type_ "email", name "EMAIL", onInput EmailInputChanged, value model.emailInput, placeholder "Votre email", autofocus True, required True ] []
+            , input
+                [ id "mailchimp-email"
+                , class "emailInput"
+                , type_ "email"
+                , name "EMAIL"
+                , onInput EmailInputChanged
+                , value model.emailInput
+                , placeholder "Votre email"
+                , autofocus True
+                , required True
+                , attribute "aria-label" "Saisissez votre email"
+                ]
+                []
             , input [ type_ "submit", class "button", value "Prévenez-moi", disabled (RemoteData.isLoading model.mailchimpRegistration) ] []
             ]
         , case model.mailchimpRegistration of
