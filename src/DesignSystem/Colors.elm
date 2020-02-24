@@ -31,7 +31,12 @@ elmGray =
 
 elmOrange : Color
 elmOrange =
-    hex "F0AD00"
+    rgb 240 173 0
+
+
+darkOrange : Color
+darkOrange =
+    rgb 233 170 5
 
 
 footerText : Color

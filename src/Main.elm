@@ -1,7 +1,6 @@
 module Main exposing (main)
 
-import Color
-import Css exposing (Style, alignItems, backgroundColor, bold, center, color, column, cursor, displayFlex, flexDirection, flexGrow, fontFamily, fontWeight, height, int, justifyContent, lineHeight, maxWidth, pct, pointer, px, rem, sansSerif, solid, textAlign, vh, width, zero)
+import Css exposing (Style, alignItems, backgroundColor, bold, center, color, column, cursor, displayFlex, flexDirection, flexGrow, fontFamily, fontWeight, height, hover, int, justifyContent, lineHeight, maxWidth, pct, pointer, px, rem, sansSerif, solid, textAlign, vh, width, zero)
 import Css.Global as Css exposing (Snippet)
 import Css.Media exposing (only, screen)
 import DesignSystem.Colors as Colors
@@ -376,6 +375,9 @@ indexStyles =
                 , fontSize FontSize.L
                 , cursor pointer
                 , onMobile [ Css.borderRadius4 zero zero (px 8) (px 8), marginTop NoSpace, width (pct 100), padding XS ]
+                , hover
+                    [ backgroundColor Colors.darkOrange
+                    ]
                 ]
             , Css.class "error" [ fontSize FontSize.L, maxWidth (pct 90), color Colors.red ]
             , Css.class "footer"
