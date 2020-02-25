@@ -386,6 +386,10 @@ indexStyles =
                 , color Colors.darkBlue
                 , fontSize FontSize.L
                 , onMobile [ Css.borderRadius4 (px 8) (px 8) zero zero, marginBottom NoSpace, width (pct 100), padding XS ]
+                , Css.focus
+                    [ Css.borderRadius4 (px 8) zero zero (px 8)
+                    , Css.border3 (px 4) solid Colors.elmOrange
+                    ]
                 ]
             , Css.class "button"
                 [ margin2 M NoSpace
