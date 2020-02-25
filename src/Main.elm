@@ -316,7 +316,7 @@ mailchimpErrorToString error =
 footer : Html Msg
 footer =
     p [ class "footer" ]
-        [ text "Elm France est une association à but non lucratif – Votre adresse email ne sera transmise à aucun tiers et ne sera utilisée que pour informer d'évènements relatifs au langage Elm." ]
+        [ text "Elm France est une association à but non lucratif – Votre adresse email ne sera utilisée que pour vous informer d'évènements relatifs au langage Elm." ]
 
 
 indexStyles : List Snippet
