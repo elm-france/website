@@ -387,8 +387,8 @@ indexStyles =
                 , fontSize FontSize.L
                 , onMobile [ Css.borderRadius4 (px 8) (px 8) zero zero, marginBottom NoSpace, width (pct 100), padding XS ]
                 , Css.focus
-                    [ Css.borderRadius4 (px 8) zero zero (px 8)
-                    , Css.border3 (px 4) solid Colors.elmOrange
+                    [ Css.boxShadow4 (px 0) (px 0) (px 8) Colors.darkOrange
+                    , Css.outline zero
                     ]
                 ]
             , Css.class "button"
@@ -401,6 +401,10 @@ indexStyles =
                 , fontSize FontSize.L
                 , cursor pointer
                 , onMobile [ Css.borderRadius4 zero zero (px 8) (px 8), marginTop NoSpace, width (pct 100), padding XS ]
+                , Css.focus
+                    [ Css.boxShadow4 (px 0) (px 0) (px 8) Colors.darkOrange
+                    , Css.outline zero
+                    ]
                 , hover
                     [ backgroundColor Colors.darkOrange
                     ]
